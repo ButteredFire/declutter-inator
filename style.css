@@ -1,0 +1,66 @@
+:root {
+    --background-main: #1e2124;
+    --background-secondary: #282b30;
+    --separator: #424549;
+}
+
+body {
+    background: var(--background-main);
+    color: white;
+}
+
+header, main, footer {
+    text-align: center;
+    padding: 10px;
+}
+
+main {
+    padding: 10px;
+}
+
+.card, .card-body, .card-section, .card-body-section {
+    background: var(--background-main);
+    border-color: var(--background-secondary);
+    text-align: left;
+    display: flex;
+    vertical-align: middle;
+    flex: 0px;
+    padding: 0px;
+}
+
+.card-section {
+    margin: 8px;
+}
+
+.chevron, .card-body-section p {
+    align-self: center;
+    margin-left: 5px;
+}
+.card-body-section p {
+    margin: 10px;
+}
+
+.card-body-section:hover {
+    background: var(--background-secondary);
+    cursor: pointer;
+}
+
+.card-collapse {
+    padding: 10px;
+}
+
+.category-sections {
+    padding: 0px;
+}
+
+
+/* .card-body svg {
+    rotate: 90deg;
+} */
+
+.separator {
+    width: 100%;
+    height: 1px;
+    background: var(--separator);
+
+}
