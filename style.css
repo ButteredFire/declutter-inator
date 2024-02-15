@@ -2,6 +2,7 @@
     --background-main: #1e2124;
     --background-secondary: #282b30;
     --separator: #424549;
+    --highlighted: #6e6f71; 
 }
 
 body {
@@ -46,11 +47,28 @@ main {
 }
 
 .card-collapse {
-    padding: 10px;
+    padding: 0px;
+    border-radius: 0px;
+    border-width: 0px 0px 0px medium; /* Set left border width to "medium" */
+    border-left-color: var(--highlighted);
+
 }
 
 .category-sections {
     padding: 0px;
+}
+
+.chevron-to-true {
+    animation: rotate-to-true 0.3s ease forwards;
+}
+.chevron-to-false {
+    animation: rotate-to-false 0.3s ease forwards;
+}
+@keyframes rotate-to-true {
+    from { transform: rotate(0deg); } to { transform: rotate(90deg); }
+}
+@keyframes rotate-to-false {
+    from { transform: rotate(90deg); } to { transform: rotate(0deg); }
 }
 
 
