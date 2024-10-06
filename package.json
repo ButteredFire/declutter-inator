@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "dotenv": "^16.4.5"
+  },
+  "name": "declutter-inator",
+  "version": "1.0.0",
+  "main": "./scripts/js/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ButteredFire/declutter-inator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ButteredFire/declutter-inator/issues"
+  },
+  "homepage": "https://github.com/ButteredFire/declutter-inator#readme",
+  "devDependencies": {},
+  "description": ""
+}

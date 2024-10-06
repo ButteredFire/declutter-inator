@@ -1,0 +1,14 @@
+{
+    "manifest_version": 3,
+    "name": "Declutter-inator",
+    "description": "A Chrome extension that organizes your tabs into neat, tidy, and labelled sections (in which your tabs are also categorized) to reduce clutter.",
+    "version": "1.0",
+    "permissions": ["tabs", "activeTab"],
+    "background": {
+      "service_worker": "./scripts/js/background.js"
+    },
+    "action": {
+      "default_popup": "index.html",
+      "default_icon": "declutterinator-logo.png"
+    }
+}
