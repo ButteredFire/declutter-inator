@@ -5,7 +5,8 @@
     "version": "1.0",
     "permissions": ["tabs", "activeTab"],
     "background": {
-      "service_worker": "./scripts/js/background.js"
+      "service_worker": "./scripts/js/background.js",
+      "type": "module"
     },
     "action": {
       "default_popup": "index.html",

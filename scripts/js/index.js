@@ -1,7 +1,12 @@
-//import * as dotenv from "dotenv";
-
 // Load in environmental variables
-//dotenv.config();
+fetch(chrome.runtime.getURL("../../env.json"))
+  .then(response => response.json())
+  .then(env => {
+    
+    const API_KEY = env.API_KEY;
+    
+  })
+  .catch(error => console.error('Error loading environmental variables: ', error));
 
 //console.log(`[DEVELOPER] API KEY: ${process.env.API_KEY}`)
 
@@ -461,13 +466,17 @@ class sectionGenerator  {
     }
 }
 
+function addSection() {
+    console.log("addSection()");
+}
 
-function initiateAnalysis() {
-    console.log("cock and balls!!!!!");
+function initiateAnalysis(tabList) {
+    console.log("initiateAnalysis(tabList)");
 }
 
 
 let tabList = [];
+let a = {};
 document.addEventListener('DOMContentLoaded', () => {
     /*
     Documentation: https://developer.chrome.com/docs/extensions/reference/api/tabs
@@ -486,11 +495,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-let orgTabsBtn = document.getElementById("orgTabsBtn");
-orgTabsBtn.addEventListener("click", () => {
-    initiateAnalysis(tabList);
-});
+// TODO: Implement logic for AI categorization on/off toggle
+let checkboxUseAI = document.getElementById("checkbox-UseAI");
 
+let nonExParagraph = document.getElementById("nonex-p");
+let orgTabsBtn = document.getElementById("orgTabsBtn");
+
+// TODO: Imeplement logic for div change depending on AI categorization feature status (on/off)
+if (false) {
+    nonExParagraph.innerHTML = "Start categorizing your tabs by adding a section below.";
+
+    orgTabsBtn.innerHTML = "Add section";
+    orgTabsBtn.addEventListener("click", () => {
+        addSection();
+    });
+}
+else {
+    nonExParagraph.innerHTML = "Let AI do the heavy work for you and organize your tabs!";
+
+    let btnIcon = document.createElement("i");
+    let btnText = document.createElement("span");
+
+    btnIcon.className = "bi bi-bar-chart-steps";
+    btnText.style.marginLeft = "5px";
+    btnText.innerHTML = "Organize tabs";
+
+    orgTabsBtn.appendChild(btnIcon);
+    orgTabsBtn.appendChild(btnText);
+    orgTabsBtn.addEventListener("click", () => {
+        initiateAnalysis(tabList);
+    });
+}
 
 //#region Function Executions
 

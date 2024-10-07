@@ -16,7 +16,7 @@ body {
     color: white;
 }
 
-header, main, footer {
+header, .settings, main, footer {
     text-align: center;
     padding: 10px;
 }
