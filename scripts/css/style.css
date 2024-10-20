@@ -6,6 +6,26 @@
     --highlighted: #6e6f71; 
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: var(--background-secondary);
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--background-primary);
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--background-primary);
+  }
+
 html {
     width: 500px;
     height: 400px;

@@ -187,7 +187,7 @@ const chevronStates = {
     "true": "90deg",
     "false": "0deg"
 };
-let sectionID = 0;
+var sectionID = 0;
 
 //#endregion
 
@@ -466,66 +466,96 @@ class sectionGenerator  {
     }
 }
 
-function addSection() {
-    console.log("addSection()");
-}
+class tabsManager {
+    constructor() {
+        let temp = [];
+        // document.addEventListener('DOMContentLoaded', () => {});
+        /*
+        Documentation: https://developer.chrome.com/docs/extensions/reference/api/tabs
+        */
+        chrome.tabs.query({}, function(tabs) {
+            tabs.forEach(tab => {
+                let favIconUrl = tab.favIconUrl;
+                let title = tab.title;
+                let url = tab.url;
+                //console.log(`[FavIcon: ${favIconUrl} || URL: ${url}] ${title}`);
+                temp.push(
+                    {"name": title, "icon": favIconUrl, "url": url}
+                );
+            });
 
-function initiateAnalysis(tabList) {
-    console.log("initiateAnalysis(tabList)");
-}
-
-
-let tabList = [];
-let a = {};
-document.addEventListener('DOMContentLoaded', () => {
-    /*
-    Documentation: https://developer.chrome.com/docs/extensions/reference/api/tabs
-    */
-    chrome.tabs.query({}, function(tabs) {
-        tabs.forEach(tab => {
-            let favIconUrl = tab.favIconUrl;
-            let title = tab.title;
-            let url = tab.url;
-            //console.log(`[FavIcon: ${favIconUrl} || URL: ${url}] ${title}`);
-            tabList.push(
-                {"name": title, "icon": favIconUrl, "url": url}
-            );
         });
 
-    });
+        this.tabList = temp;
+    }
+
+    getTabList() {
+        return this.tabList;
+    }
+}
+
+function addSection() {
+    const tabs = new tabsManager();
+    const tabList = tabs.getTabList();
+    console.log("ADD_SECTIONS");
+    console.log(tabList);
+}
+
+function initiateAnalysis() {
+    const tabs = new tabsManager();
+    const tabList = tabs.getTabList();
+    console.log("INITIATE_ANALYSIS");
+    console.log(tabList);
+}
+
+
+
+
+
+var nonExParagraph = document.getElementById("nonex-p");
+var orgTabsBtn = document.getElementById("orgTabsBtn");
+var useAIBtn = document.getElementById("useAIBtn");
+var btnIcon = document.createElement("i");
+var btnText = document.createElement("span");
+
+orgTabsBtn.innerHTML = "Add section";
+orgTabsBtn.addEventListener("click", () => {
+    addSection();
 });
 
-// TODO: Implement logic for AI categorization on/off toggle
-let checkboxUseAI = document.getElementById("checkbox-UseAI");
+btnIcon.className = "bi bi-bar-chart-steps";
+btnText.style.marginLeft = "5px";
+btnText.innerHTML = "Organize tabs";
+useAIBtn.appendChild(btnIcon);
+useAIBtn.appendChild(btnText);
+useAIBtn.addEventListener("click", () => {
+    initiateAnalysis();
+});
 
-let nonExParagraph = document.getElementById("nonex-p");
-let orgTabsBtn = document.getElementById("orgTabsBtn");
 
-// TODO: Imeplement logic for div change depending on AI categorization feature status (on/off)
-if (false) {
-    nonExParagraph.innerHTML = "Start categorizing your tabs by adding a section below.";
+var checkboxUseAI = document.getElementById("checkbox-UseAI");
+checkboxUseAI.checked = false; // Sets default state
+updateUI(false);               // Sets default state
+checkboxUseAI.addEventListener("change", () => {
+    updateUI(checkboxUseAI.checked);
+});
 
-    orgTabsBtn.innerHTML = "Add section";
-    orgTabsBtn.addEventListener("click", () => {
-        addSection();
-    });
+function updateUI(AIEnabled) {
+    nonExParagraph.innerHTML = "";
+    
+    if (AIEnabled) {
+        nonExParagraph.innerHTML = "Let AI do the heavy work for you and organize your tabs!";
+        useAIBtn.style.display = "inline-flex";
+        orgTabsBtn.style.display = "none";
+    }
+    else {
+        nonExParagraph.innerHTML = "Start categorizing your tabs by adding a section below.";
+        orgTabsBtn.style.display = "inline-flex";
+        useAIBtn.style.display = "none";
+    }
 }
-else {
-    nonExParagraph.innerHTML = "Let AI do the heavy work for you and organize your tabs!";
 
-    let btnIcon = document.createElement("i");
-    let btnText = document.createElement("span");
 
-    btnIcon.className = "bi bi-bar-chart-steps";
-    btnText.style.marginLeft = "5px";
-    btnText.innerHTML = "Organize tabs";
-
-    orgTabsBtn.appendChild(btnIcon);
-    orgTabsBtn.appendChild(btnText);
-    orgTabsBtn.addEventListener("click", () => {
-        initiateAnalysis(tabList);
-    });
-}
 
 //#region Function Executions
 
